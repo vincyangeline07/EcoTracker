@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoTrack - Carbon Footprint Calculator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary: #10B981;
+            --primary-dark: #059669;
+            --primary-light: #D1FAE5;
+            --secondary: #3B82F6;
+            --accent: #F59E0B;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --danger: #EF4444;
+            --dark: #1F2937;
+            --dark-light: #374151;
+            --gray: #6B7280;
+            --gray-light: #9CA3AF;
+            --gray-lighter: #F3F4F6;
+            --white: #FFFFFF;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --gradient-primary: linear-gradient(135deg, #10B981 0%, #059669 100%);
+            --gradient-secondary: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%);
+            --gradient-accent: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: linear-gradient(135deg, #F0FDF4 0%, #ECFDF5 50%, #F0F9FF 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header Styles */
+        header {
+            background: var(--white);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--gray-lighter);
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .logo-text {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 24px;
+            color: var(--dark);
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--gray);
+            font-weight: 500;
+            transition: color 0.2s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .nav-link.active {
+            color: var(--primary);
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--primary);
+            border-radius: 1px;
+        }
+
+        /* Main Content */
+        main {
+            padding: 48px 0;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .page-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 16px;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-subtitle {
+            font-size: 18px;
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* Calculator Section */
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 32px;
+            margin-bottom: 48px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            transition: all 0.5s ease;
+        }
+
+        .calculator-grid.with-results {
+            grid-template-columns: 1fr 1fr;
+            max-width: 1200px;
+        }
+
+        .calculator-form {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--gray-lighter);
+        }
+
+        .form-section {
+            margin-bottom: 32px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid var(--gray-lighter);
+        }
+
+        .section-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--gradient-primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 20px;
+        }
+
+        .section-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+            font-size: 14px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 16px;
+            border: 2px solid var(--gray-lighter);
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.2s ease;
+            background: var(--white);
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-light);
+        }
+
+        .input-field:hover {
+            border-color: var(--gray-light);
+        }
+
+        .select-field {
+            width: 100%;
+            padding: 16px;
+            border: 2px solid var(--gray-lighter);
+            border-radius: 12px;
+            font-size: 16px;
+            background: var(--white);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .select-field:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-light);
+        }
+
+        .calculate-btn {
+            width: 100%;
+            background: var(--gradient-primary);
+            color: var(--white);
+            border: none;
+            padding: 18px 32px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+            margin-top: 16px;
+        }
+
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .calculate-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Results Section */
+        .results-section {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--gray-lighter);
+            display: none;
+            opacity: 0;
+            transform: translateX(20px);
+            transition: all 0.5s ease;
+        }
+
+        .results-section.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .results-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .results-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 8px;
+        }
+
+        .results-subtitle {
+            color: var(--gray);
+            font-size: 16px;
+        }
+
+        .main-result {
+            background: linear-gradient(135deg, #F0FDF4 0%, #ECFDF5 100%);
+            border: 2px solid var(--primary-light);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .result-number {
+            font-family: 'Poppins', sans-serif;
+            font-size: 64px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .result-unit {
+            font-size: 18px;
+            color: var(--gray);
+            font-weight: 500;
+        }
+
+        .result-label {
+            font-size: 16px;
+            color: var(--dark-light);
+            margin-top: 16px;
+        }
+
+        .breakdown-section {
+            margin-bottom: 32px;
+        }
+
+        .breakdown-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .chart-container {
+            background: var(--gray-lighter);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .recommendations-section {
+            margin-bottom: 32px;
+        }
+
+        .recommendations-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .recommendations-list {
+            list-style: none;
+            display: grid;
+            gap: 16px;
+        }
+
+        .recommendation-item {
+            background: var(--gray-lighter);
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .recommendation-icon {
+            width: 24px;
+            height: 24px;
+            background: var(--primary);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 12px;
+        }
+
+        .recommendation-text {
+            color: var(--dark);
+            font-weight: 500;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+        }
+
+        .btn-secondary {
+            background: var(--gray-lighter);
+            color: var(--dark);
+            border: 2px solid var(--gray-lighter);
+            padding: 16px 32px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-secondary:hover {
+            background: var(--gray-light);
+            border-color: var(--gray-light);
+            color: var(--white);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .calculator-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .calculator-form,
+            .results-section {
+                padding: 24px;
+            }
+
+            .page-title {
+                font-size: 36px;
+            }
+
+            .container {
+                padding: 0 16px;
+            }
+
+            .header-nav {
+                display: none;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        /* Loading State */
+        .loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            margin: -10px 0 0 -10px;
+            border: 2px solid var(--primary);
+            border-top: 2px solid transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <span class="logo-text">EcoTrack</span>
+                </a>
+                <nav class="header-nav">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="calculator.html" class="nav-link active">Calculator</a>
+                    <a href="solutions.html" class="nav-link">Solutions</a>
+                    <a href="education.html" class="nav-link">Education</a>
+                    <a href="rewards.html" class="nav-link">Rewards</a>
+                    <a href="account.html" class="nav-link">Account</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="page-header">
+            <h1 class="page-title">Carbon Footprint Calculator</h1>
+            <p class="page-subtitle">Understand your environmental impact and discover ways to reduce your carbon footprint with our comprehensive calculator.</p>
+        </div>
+
+        <div class="calculator-grid">
+            <div class="calculator-form">
+                <form id="footprint-form">
+                    <div class="form-section">
+                        <div class="section-header">
+                            <div class="section-icon">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <h3 class="section-title">Energy Usage</h3>
+                        </div>
+                        <div class="input-group">
+                            <label for="electricity" class="input-label">Monthly Electricity (kWh)</label>
+                            <input type="number" id="electricity" class="input-field" min="0" value="0" placeholder="Enter your monthly electricity usage">
+                        </div>
+                        <div class="input-group">
+                            <label for="gas" class="input-label">Monthly Natural Gas (therms)</label>
+                            <input type="number" id="gas" class="input-field" min="0" value="0" placeholder="Enter your monthly gas usage">
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <div class="section-header">
+                            <div class="section-icon">
+                                <i class="fas fa-car"></i>
+                            </div>
+                            <h3 class="section-title">Transportation</h3>
+                        </div>
+                        <div class="input-group">
+                            <label for="car-miles" class="input-label">Car Miles (monthly)</label>
+                            <input type="number" id="car-miles" class="input-field" min="0" value="0" placeholder="Enter monthly car miles">
+                        </div>
+                        <div class="input-group">
+                            <label for="mpg" class="input-label">Your Car's MPG</label>
+                            <input type="number" id="mpg" class="input-field" min="1" value="25" placeholder="Enter your car's fuel efficiency">
+                        </div>
+                        <div class="input-group">
+                            <label for="public-transit" class="input-label">Public Transit Miles (monthly)</label>
+                            <input type="number" id="public-transit" class="input-field" min="0" value="0" placeholder="Enter monthly transit miles">
+                        </div>
+                        <div class="input-group">
+                            <label for="flights" class="input-label">Flights (hours/year)</label>
+                            <input type="number" id="flights" class="input-field" min="0" value="0" placeholder="Enter annual flight hours">
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <div class="section-header">
+                            <div class="section-icon">
+                                <i class="fas fa-utensils"></i>
+                            </div>
+                            <h3 class="section-title">Food & Waste</h3>
+                        </div>
+                        <div class="input-group">
+                            <label for="meat-consumption" class="input-label">Meat Consumption</label>
+                            <select id="meat-consumption" class="select-field">
+                                <option value="heavy">Heavy (daily)</option>
+                                <option value="medium" selected>Medium (few times/week)</option>
+                                <option value="light">Light (rarely)</option>
+                                <option value="none">Vegetarian/Vegan</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="waste" class="input-label">Weekly Waste Production</label>
+                            <select id="waste" class="select-field">
+                                <option value="high">High (2+ bags)</option>
+                                <option value="medium" selected>Medium (1 bag)</option>
+                                <option value="low">Low (less than 1 bag)</option>
+                                <option value="zero">Zero waste</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="recycling" class="input-label">Recycling Habits</label>
+                            <select id="recycling" class="select-field">
+                                <option value="none">Don't recycle</option>
+                                <option value="some">Recycle sometimes</option>
+                                <option value="most" selected>Recycle most items</option>
+                                <option value="all">Recycle everything possible</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="calculate-btn">
+                        <i class="fas fa-calculator"></i>
+                        Calculate My Footprint
+                    </button>
+                </form>
+            </div>
+
+            <div class="results-section" id="results">
+                <div class="results-header">
+                    <h2 class="results-title">Your Carbon Footprint Results</h2>
+                    <p class="results-subtitle">Here's a detailed breakdown of your environmental impact</p>
+                </div>
+
+                <div class="main-result">
+                    <div class="result-number" id="total-footprint">0</div>
+                    <div class="result-unit">kg CO₂e per year</div>
+                    <div class="result-label">Total Annual Carbon Footprint</div>
+                </div>
+
+                <div class="breakdown-section">
+                    <h3 class="breakdown-title">Breakdown by Category</h3>
+                    <div class="chart-container">
+                        <canvas id="breakdown-pie" style="max-width: 100%; height: 300px;"></canvas>
+                    </div>
+                </div>
+
+                <div class="recommendations-section">
+                    <h3 class="recommendations-title">Personalized Recommendations</h3>
+                    <ul class="recommendations-list" id="recommendations-list">
+                        <!-- Recommendations will be populated here -->
+                    </ul>
+                </div>
+
+                <div class="action-buttons">
+                    <button id="recalculate-btn" class="btn-secondary">
+                        <i class="fas fa-redo"></i>
+                        Recalculate
+                    </button>
+                    <a href="solutions.html" class="btn-secondary">
+                        <i class="fas fa-lightbulb"></i>
+                        View Solutions
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const form = document.getElementById('footprint-form');
+        const resultsSection = document.getElementById('results');
+        const recalculateBtn = document.getElementById('recalculate-btn');
+        let breakdownPie;
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            calculateFootprint();
+        });
+        
+        recalculateBtn.addEventListener('click', function() {
+            resultsSection.style.display = 'none';
+            resultsSection.classList.remove('show');
+            const calculatorGrid = document.querySelector('.calculator-grid');
+            calculatorGrid.classList.remove('with-results');
+            form.reset();
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        });
+
+        function calculateFootprint() {
+            const electricity = parseFloat(document.getElementById('electricity').value) || 0;
+            const gas = parseFloat(document.getElementById('gas').value) || 0;
+            const carMiles = parseFloat(document.getElementById('car-miles').value) || 0;
+            const mpg = parseFloat(document.getElementById('mpg').value) || 25;
+            const publicTransit = parseFloat(document.getElementById('public-transit').value) || 0;
+            const flights = parseFloat(document.getElementById('flights').value) || 0;
+            const meatConsumption = document.getElementById('meat-consumption').value;
+            const waste = document.getElementById('waste').value;
+            const recycling = document.getElementById('recycling').value;
+
+            const electricityEmissions = electricity * 0.5 * 12; // kg CO2/year
+            const gasEmissions = gas * 5.3 * 12; // kg CO2/year
+            const gallonsUsed = (carMiles * 12) / mpg;
+            const carEmissions = gallonsUsed * 8.887; // kg CO2/year
+            const transitEmissions = publicTransit * 0.15 * 12; // kg CO2/year
+            const flightEmissions = flights * 90; // kg CO2/year (short-haul)
+
+            let foodEmissions = 0;
+            switch(meatConsumption) {
+                case 'heavy': foodEmissions = 3000; break;
+                case 'medium': foodEmissions = 2000; break;
+                case 'light': foodEmissions = 1000; break;
+                case 'none': foodEmissions = 500; break;
+            }
+
+            let wasteEmissions = 0;
+            switch(waste) {
+                case 'high': wasteEmissions = 1000; break;
+                case 'medium': wasteEmissions = 700; break;
+                case 'low': wasteEmissions = 400; break;
+                case 'zero': wasteEmissions = 100; break;
+            }
+
+            let recyclingAdjustment = 0;
+            switch(recycling) {
+                case 'none': recyclingAdjustment = 0; break;
+                case 'some': recyclingAdjustment = -200; break;
+                case 'most': recyclingAdjustment = -400; break;
+                case 'all': recyclingAdjustment = -600; break;
+            }
+
+            const totalFootprint = electricityEmissions + gasEmissions + carEmissions + 
+                                 transitEmissions + flightEmissions + foodEmissions + 
+                                 wasteEmissions + recyclingAdjustment;
+
+            document.getElementById('total-footprint').textContent = Math.round(totalFootprint).toLocaleString();
+
+            const categories = [
+                {name: 'Energy', value: electricityEmissions + gasEmissions, color: '#10B981'},
+                {name: 'Transportation', value: carEmissions + transitEmissions, color: '#3B82F6'},
+                {name: 'Flights', value: flightEmissions, color: '#8B5CF6'},
+                {name: 'Food', value: foodEmissions, color: '#F59E0B'},
+                {name: 'Waste', value: wasteEmissions + recyclingAdjustment, color: '#EF4444'}
+            ];
+
+            // Create pie chart
+            const pieCtx = document.getElementById('breakdown-pie').getContext('2d');
+            if (breakdownPie) breakdownPie.destroy();
+            
+            breakdownPie = new Chart(pieCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: categories.map(c => c.name),
+                    datasets: [{
+                        data: categories.map(c => c.value),
+                        backgroundColor: categories.map(c => c.color),
+                        borderWidth: 0,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 20,
+                                usePointStyle: true,
+                                font: {
+                                    family: 'Inter',
+                                    size: 12
+                                }
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                            titleColor: '#fff',
+                            bodyColor: '#fff',
+                            borderColor: 'rgba(255, 255, 255, 0.1)',
+                            borderWidth: 1,
+                            cornerRadius: 8,
+                            callbacks: {
+                                label: function(context) {
+                                    const value = context.parsed;
+                                    const percentage = ((value / totalFootprint) * 100).toFixed(1);
+                                    return `${context.label}: ${value.toLocaleString()} kg (${percentage}%)`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Generate recommendations
+            generateRecommendations(totalFootprint, categories);
+
+            // Show results and change layout
+            const calculatorGrid = document.querySelector('.calculator-grid');
+            calculatorGrid.classList.add('with-results');
+            
+            resultsSection.style.display = 'block';
+            // Use setTimeout to ensure display:block is applied before adding show class
+            setTimeout(() => {
+                resultsSection.classList.add('show');
+            }, 10);
+            
+            window.scrollTo({ top: resultsSection.offsetTop, behavior: 'smooth' });
+        }
+
+        function generateRecommendations(totalFootprint, categories) {
+            const recommendationsList = document.getElementById('recommendations-list');
+            recommendationsList.innerHTML = '';
+
+            const recommendations = [];
+
+            // Energy recommendations
+            if (categories[0].value > 2000) {
+                recommendations.push({
+                    icon: 'fas fa-solar-panel',
+                    text: 'Switch to renewable energy sources or install solar panels'
+                });
+            }
+
+            // Transportation recommendations
+            if (categories[1].value > 1500) {
+                recommendations.push({
+                    icon: 'fas fa-bicycle',
+                    text: 'Consider carpooling, public transit, or cycling for daily commutes'
+                });
+            }
+
+            // Flight recommendations
+            if (categories[2].value > 500) {
+                recommendations.push({
+                    icon: 'fas fa-plane',
+                    text: 'Reduce air travel and consider video conferencing alternatives'
+                });
+            }
+
+            // Food recommendations
+            if (categories[3].value > 2000) {
+                recommendations.push({
+                    icon: 'fas fa-carrot',
+                    text: 'Reduce meat consumption and choose locally sourced foods'
+                });
+            }
+
+            // General recommendations based on total footprint
+            if (totalFootprint > 10000) {
+                recommendations.push({
+                    icon: 'fas fa-home',
+                    text: 'Improve home insulation and energy efficiency'
+                });
+            }
+
+            if (totalFootprint < 5000) {
+                recommendations.push({
+                    icon: 'fas fa-star',
+                    text: 'Excellent! You\'re already living sustainably'
+                });
+            }
+
+            // Add default recommendations if none specific
+            if (recommendations.length === 0) {
+                recommendations.push(
+                    {
+                        icon: 'fas fa-recycle',
+                        text: 'Continue recycling and composting to maintain low waste levels'
+                    },
+                    {
+                        icon: 'fas fa-lightbulb',
+                        text: 'Switch to LED bulbs and energy-efficient appliances'
+                    }
+                );
+            }
+
+            // Display recommendations
+            recommendations.forEach(rec => {
+                const li = document.createElement('li');
+                li.className = 'recommendation-item';
+                li.innerHTML = `
+                    <div class="recommendation-icon">
+                        <i class="${rec.icon}"></i>
+                    </div>
+                    <span class="recommendation-text">${rec.text}</span>
+                `;
+                recommendationsList.appendChild(li);
+            });
+        }
+    </script>
+</body>
+</html>
+

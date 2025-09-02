@@ -1,0 +1,1367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoTrack - Rewards</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #10B981;
+            --primary-dark: #059669;
+            --primary-light: #D1FAE5;
+            --secondary: #3B82F6;
+            --accent: #F59E0B;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --danger: #EF4444;
+            --dark: #1F2937;
+            --dark-light: #374151;
+            --gray: #6B7280;
+            --gray-light: #9CA3AF;
+            --gray-lighter: #F3F4F6;
+            --white: #FFFFFF;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --gradient-primary: linear-gradient(135deg, #10B981 0%, #059669 100%);
+            --gradient-secondary: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%);
+            --gradient-accent: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+            --gold: #FFD700;
+            --silver: #C0C0C0;
+            --bronze: #CD7F32;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: linear-gradient(135deg, #F0FDF4 0%, #ECFDF5 50%, #F0F9FF 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header Styles */
+        header {
+            background: var(--white);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--gray-lighter);
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .logo-text {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 24px;
+            color: var(--dark);
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--gray);
+            font-weight: 500;
+            transition: color 0.2s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .nav-link.active {
+            color: var(--primary);
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--primary);
+            border-radius: 1px;
+        }
+
+        /* Main Content */
+        main {
+            padding: 48px 0;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .page-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 16px;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-subtitle {
+            font-size: 18px;
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                        url('https://images.unsplash.com/photo-1551698618-1dfe5d97d256?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 80px 0;
+            margin-bottom: 48px;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: white;
+        }
+
+        .hero p {
+            font-size: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* Section Styles */
+        section {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 32px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--gray-lighter);
+        }
+
+        h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 32px;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        h3 i {
+            color: var(--primary);
+            font-size: 20px;
+        }
+
+        p {
+            color: var(--gray);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            margin: 32px 0;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 32px 24px;
+            background: var(--gray-lighter);
+            border-radius: 16px;
+            border: 2px solid var(--primary-light);
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--primary);
+        }
+
+        .stat-number {
+            font-family: 'Poppins', sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 16px;
+            color: var(--gray);
+            font-weight: 500;
+        }
+
+        /* Card Grid */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 24px;
+            margin: 32px 0;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            transition: all 0.3s ease;
+            border: 1px solid var(--gray-lighter);
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 24px;
+        }
+
+        .card h3 {
+            margin: 0 0 16px;
+            color: var(--dark);
+        }
+
+        .card p {
+            color: var(--gray);
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        /* Achievement Cards */
+        .achievement-card {
+            background: linear-gradient(135deg, #F0FDF4 0%, #ECFDF5 100%);
+            border: 2px solid var(--primary-light);
+            border-radius: 20px;
+            padding: 32px;
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .achievement-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            font-size: 36px;
+            color: var(--white);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .achievement-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 8px;
+        }
+
+        .achievement-description {
+            color: var(--gray);
+            margin-bottom: 16px;
+        }
+
+        .achievement-progress {
+            background: var(--gray-lighter);
+            border-radius: 10px;
+            height: 8px;
+            margin: 16px 0;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--gradient-primary);
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        .achievement-status {
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .status-completed {
+            color: var(--success);
+        }
+
+        .status-in-progress {
+            color: var(--gray);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            background: var(--gradient-primary);
+            color: var(--white);
+            border: none;
+            padding: 16px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+            box-shadow: var(--shadow);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .btn-secondary {
+            background: var(--gray-lighter);
+            color: var(--dark);
+            border: 2px solid var(--gray-lighter);
+        }
+
+        .btn-secondary:hover {
+            background: var(--gray-light);
+            border-color: var(--gray-light);
+            color: var(--white);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .page-title {
+                font-size: 36px;
+            }
+
+            .hero h2 {
+                font-size: 32px;
+            }
+
+            .container {
+                padding: 0 16px;
+            }
+
+            .header-nav {
+                display: none;
+            }
+
+            section {
+                padding: 24px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .achievement-icon.completed {
+            animation: pulse 2s infinite;
+        }
+
+        /* Enhanced Leaderboard Styles */
+        .leaderboard-filters {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .filter-btn {
+            padding: 12px 20px;
+            border: 2px solid var(--gray-lighter);
+            background: var(--white);
+            color: var(--gray);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .filter-btn.active {
+            background: var(--primary);
+            color: var(--white);
+            border-color: var(--primary);
+        }
+
+        .search-box {
+            position: relative;
+            min-width: 250px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 40px 12px 16px;
+            border: 2px solid var(--gray-lighter);
+            border-radius: 25px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-light);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+        }
+
+        /* Podium Section */
+        .podium-section {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr 1fr;
+            gap: 24px;
+            margin-bottom: 48px;
+            align-items: end;
+        }
+
+        .podium-card {
+            text-align: center;
+            padding: 24px;
+            border-radius: 20px;
+            background: var(--white);
+            box-shadow: var(--shadow-lg);
+            border: 2px solid var(--gray-lighter);
+            transition: all 0.3s ease;
+        }
+
+        .podium-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .first-place {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            border-color: #FFD700;
+            color: var(--dark);
+        }
+
+        .second-place {
+            background: linear-gradient(135deg, #C0C0C0 0%, #A9A9A9 100%);
+            border-color: #C0C0C0;
+            color: var(--dark);
+        }
+
+        .third-place {
+            background: linear-gradient(135deg, #CD7F32 0%, #B8860B 100%);
+            border-color: #CD7F32;
+            color: var(--white);
+        }
+
+        .medal {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        .user-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 16px;
+            border: 4px solid var(--white);
+            box-shadow: var(--shadow);
+        }
+
+        .user-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .user-stats {
+            margin-top: 16px;
+        }
+
+        .points {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .co2-reduced {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-bottom: 4px;
+        }
+
+        .level {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Leaderboard Table */
+        .leaderboard-table {
+            background: var(--white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 32px;
+        }
+
+        .table-header {
+            display: grid;
+            grid-template-columns: 80px 2fr 1fr 1fr 1fr 1fr;
+            gap: 16px;
+            padding: 20px;
+            background: var(--gray-lighter);
+            font-weight: 600;
+            color: var(--dark);
+            border-bottom: 2px solid var(--primary-light);
+        }
+
+        .table-row {
+            display: grid;
+            grid-template-columns: 80px 2fr 1fr 1fr 1fr 1fr;
+            gap: 16px;
+            padding: 20px;
+            border-bottom: 1px solid var(--gray-lighter);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .table-row:hover {
+            background: var(--gray-lighter);
+            transform: translateX(8px);
+        }
+
+        .table-row:last-child {
+            border-bottom: none;
+        }
+
+        .rank-col {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 18px;
+        }
+
+        .user-col {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .user-avatar-small {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .user-name {
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 2px;
+        }
+
+        .user-location {
+            font-size: 12px;
+            color: var(--gray);
+        }
+
+        .points-col, .co2-col, .level-col {
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+        }
+
+        .achievements-col {
+            display: flex;
+            gap: 8px;
+        }
+
+        .achievement-badge {
+            font-size: 20px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+
+        /* Your Ranking Section */
+        .your-ranking {
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--white) 100%);
+            border: 2px solid var(--primary);
+            border-radius: 20px;
+            padding: 32px;
+            text-align: center;
+        }
+
+        .ranking-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .ranking-header h3 {
+            margin: 0;
+            color: var(--dark);
+        }
+
+        .rank-number {
+            background: var(--primary);
+            color: var(--white);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .ranking-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .your-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .stat {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+        }
+
+        .stat-label {
+            color: var(--gray);
+            font-weight: 500;
+        }
+
+        .stat-value {
+            color: var(--dark);
+            font-weight: 600;
+        }
+
+        .ranking-progress {
+            text-align: left;
+        }
+
+        .progress-text {
+            color: var(--gray);
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient-primary);
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        /* Responsive Design for Leaderboard */
+        @media (max-width: 768px) {
+            .leaderboard-filters {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .podium-section {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .table-header, .table-row {
+                grid-template-columns: 60px 1.5fr 1fr 1fr 1fr 1fr;
+                gap: 8px;
+                padding: 16px 12px;
+                font-size: 14px;
+            }
+
+            .ranking-details {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .user-location {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <script>if(!localStorage.getItem('token')){window.location.href='login.html';}</script>
+    
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <span class="logo-text">EcoTrack</span>
+                </a>
+                <nav class="header-nav">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="calculator.html" class="nav-link">Calculator</a>
+                    <a href="solutions.html" class="nav-link">Solutions</a>
+                    <a href="education.html" class="nav-link">Education</a>
+                    <a href="rewards.html" class="nav-link active">Rewards</a>
+                    <a href="account.html" class="nav-link">Account</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="page-header">
+            <h1 class="page-title">Earn Rewards for Going Green</h1>
+            <p class="page-subtitle">Track your progress and earn badges, points, and recognition for your environmental efforts.</p>
+        </div>
+
+        <section class="hero">
+            <h2>Earn Rewards for Going Green</h2>
+            <p>Track your progress and earn badges, points, and recognition for your environmental efforts.</p>
+        </section>
+
+        <section>
+            <h2>Your Achievement Progress</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">Eco Warrior</div>
+                    <div class="stat-label">Current Level</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">2,450</div>
+                    <div class="stat-label">Total Points</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">3.2 tons</div>
+                    <div class="stat-label">CO2 Reduced</div>
+                </div>
+            </div>
+
+            <div class="achievement-card">
+                <div class="achievement-icon">
+                    <i class="fas fa-medal"></i>
+                </div>
+                <div class="achievement-title">Current Level: Eco Warrior</div>
+                <div class="achievement-description">750 / 1000 points to next level</div>
+                <div class="achievement-progress">
+                    <div class="progress-bar" style="width: 75%;"></div>
+                </div>
+                <div class="achievement-status status-in-progress">75% Complete</div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Recent Achievements</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-content">
+                        <div style="display: flex; align-items: center; margin-bottom: 16px;">
+                            <div class="achievement-icon" style="width: 60px; height: 60px; font-size: 24px; margin: 0 16px 0 0;">
+                                <i class="fas fa-award"></i>
+                            </div>
+                            <div>
+                                <h3 style="margin: 0;">Energy Saver</h3>
+                                <p style="margin: 0; color: var(--gray);">Reduced electricity usage by 20%</p>
+                            </div>
+                        </div>
+                        <p>Earned 150 points for switching to LED bulbs and unplugging unused devices.</p>
+                        <div class="achievement-progress">
+                            <div class="progress-bar" style="width: 100%;"></div>
+                        </div>
+                        <div class="achievement-status status-completed">✓ Completed</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-content">
+                        <div style="display: flex; align-items: center; margin-bottom: 16px;">
+                            <div class="achievement-icon" style="width: 60px; height: 60px; font-size: 24px; margin: 0 16px 0 0;">
+                                <i class="fas fa-award"></i>
+                            </div>
+                            <div>
+                                <h3 style="margin: 0;">Transport Hero</h3>
+                                <p style="margin: 0; color: var(--gray);">Used public transport for a week</p>
+                            </div>
+                        </div>
+                        <p>Earn 200 points by using public transportation, walking, or cycling for 7 consecutive days.</p>
+                        <div class="achievement-progress">
+                            <div class="progress-bar" style="width: 60%;"></div>
+                        </div>
+                        <div class="achievement-status status-in-progress">4/7 days completed</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-content">
+                        <div style="display: flex; align-items: center; margin-bottom: 16px;">
+                            <div class="achievement-icon" style="width: 60px; height: 60px; font-size: 24px; margin: 0 16px 0 0;">
+                                <i class="fas fa-award"></i>
+                            </div>
+                            <div>
+                                <h3 style="margin: 0;">Waste Warrior</h3>
+                                <p style="margin: 0; color: var(--gray);">Zero waste challenge</p>
+                            </div>
+                        </div>
+                        <p>Earn 300 points by producing less than 1kg of waste for 30 days.</p>
+                        <div class="achievement-progress">
+                            <div class="progress-bar" style="width: 30%;"></div>
+                        </div>
+                        <div class="achievement-status status-in-progress">9/30 days completed</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Available Challenges</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-content">
+                        <h3><i class="fas fa-bolt"></i> Energy Efficiency Month</h3>
+                        <p>Complete energy-saving tasks throughout the month to earn bonus points and special badges.</p>
+                        <ul style="margin: 16px 0; padding-left: 24px; color: var(--gray);">
+                            <li>Switch to LED bulbs (50 points)</li>
+                            <li>Unplug unused devices (25 points)</li>
+                            <li>Use smart thermostat (75 points)</li>
+                            <li>Monthly goal: 500 points</li>
+                        </ul>
+                        <a href="#" class="btn">Join Challenge</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-content">
+                        <h3><i class="fas fa-car"></i> Car-Free Week</h3>
+                        <p>Leave your car at home for a week and explore alternative transportation methods.</p>
+                        <ul style="margin: 16px 0; padding-left: 24px; color: var(--gray);">
+                            <li>Walk or cycle (100 points)</li>
+                            <li>Use public transport (150 points)</li>
+                            <li>Carpool (75 points)</li>
+                            <li>Weekly goal: 300 points</li>
+                        </ul>
+                        <a href="#" class="btn">Join Challenge</a>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-content">
+                        <h3><i class="fas fa-utensils"></i> Plant-Based Challenge</h3>
+                        <p>Reduce your meat consumption and explore delicious vegetarian and vegan options.</p>
+                        <ul style="margin: 16px 0; padding-left: 24px; color: var(--gray);">
+                            <li>Meatless Monday (50 points)</li>
+                            <li>Weekend vegetarian (100 points)</li>
+                            <li>Full week plant-based (300 points)</li>
+                            <li>Monthly goal: 600 points</li>
+                        </ul>
+                        <a href="#" class="btn">Join Challenge</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Leaderboard</h2>
+            <p>See how you rank among other EcoTrack users and compete for the top spot!</p>
+            
+            <!-- Time Period Filter -->
+            <div class="leaderboard-filters">
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-period="all-time">All Time</button>
+                    <button class="filter-btn" data-period="monthly">This Month</button>
+                    <button class="filter-btn" data-period="weekly">This Week</button>
+                </div>
+                <div class="search-box">
+                    <input type="text" id="leaderboard-search" placeholder="Search users..." class="search-input">
+                    <i class="fas fa-search search-icon"></i>
+                </div>
+            </div>
+
+            <!-- Top 3 Podium -->
+            <div class="podium-section">
+                <div class="podium-card second-place">
+                    <div class="medal">🥈</div>
+                    <div class="user-avatar">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&q=80" alt="Mike Chen">
+                    </div>
+                    <h3>Mike Chen</h3>
+                    <div class="user-stats">
+                        <div class="points">4,890 pts</div>
+                        <div class="co2-reduced">7.2 tons CO₂</div>
+                        <div class="level">Eco Master</div>
+                    </div>
+                </div>
+                
+                <div class="podium-card first-place">
+                    <div class="medal">🥇</div>
+                    <div class="user-avatar">
+                        <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&q=80" alt="Sarah Johnson">
+                    </div>
+                    <h3>Sarah Johnson</h3>
+                    <div class="user-stats">
+                        <div class="points">5,240 pts</div>
+                        <div class="co2-reduced">8.5 tons CO₂</div>
+                        <div class="level">Eco Legend</div>
+                    </div>
+                </div>
+                
+                <div class="podium-card third-place">
+                    <div class="medal">🥉</div>
+                    <div class="user-avatar">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&q=80" alt="Emma Davis">
+                    </div>
+                    <h3>Emma Davis</h3>
+                    <div class="user-stats">
+                        <div class="points">4,650 pts</div>
+                        <div class="co2-reduced">6.8 tons CO₂</div>
+                        <div class="level">Eco Master</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Extended Leaderboard Table -->
+            <div class="leaderboard-table">
+                <div class="table-header">
+                    <div class="rank-col">Rank</div>
+                    <div class="user-col">User</div>
+                    <div class="points-col">Points</div>
+                    <div class="co2-col">CO₂ Reduced</div>
+                    <div class="level-col">Level</div>
+                    <div class="achievements-col">Achievements</div>
+                </div>
+                
+                <div class="table-row" data-rank="4">
+                    <div class="rank-col">4</div>
+                    <div class="user-col">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&q=80" alt="Alex Rodriguez" class="user-avatar-small">
+                        <div class="user-info">
+                            <div class="user-name">Alex Rodriguez</div>
+                            <div class="user-location">New York, NY</div>
+                        </div>
+                    </div>
+                    <div class="points-col">4,320</div>
+                    <div class="co2-col">6.1 tons</div>
+                    <div class="level-col">Eco Warrior</div>
+                    <div class="achievements-col">
+                        <span class="achievement-badge">🏆</span>
+                        <span class="achievement-badge">🌱</span>
+                        <span class="achievement-badge">⚡</span>
+                    </div>
+                </div>
+
+                <div class="table-row" data-rank="5">
+                    <div class="rank-col">5</div>
+                    <div class="user-col">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&q=80" alt="Lisa Wang" class="user-avatar-small">
+                        <div class="user-info">
+                            <div class="user-name">Lisa Wang</div>
+                            <div class="user-location">San Francisco, CA</div>
+                        </div>
+                    </div>
+                    <div class="points-col">4,180</div>
+                    <div class="co2-col">5.9 tons</div>
+                    <div class="level-col">Eco Warrior</div>
+                    <div class="achievements-col">
+                        <span class="achievement-badge">🏆</span>
+                        <span class="achievement-badge">🌱</span>
+                    </div>
+                </div>
+
+                <div class="table-row" data-rank="6">
+                    <div class="rank-col">6</div>
+                    <div class="user-col">
+                        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&q=80" alt="David Kim" class="user-avatar-small">
+                        <div class="user-info">
+                            <div class="user-name">David Kim</div>
+                            <div class="user-location">Seattle, WA</div>
+                        </div>
+                    </div>
+                    <div class="points-col">3,950</div>
+                    <div class="co2-col">5.6 tons</div>
+                    <div class="level-col">Eco Enthusiast</div>
+                    <div class="achievements-col">
+                        <span class="achievement-badge">🏆</span>
+                        <span class="achievement-badge">🌱</span>
+                    </div>
+                </div>
+
+                <div class="table-row" data-rank="7">
+                    <div class="rank-col">7</div>
+                    <div class="user-col">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&q=80" alt="Maria Garcia" class="user-avatar-small">
+                        <div class="user-info">
+                            <div class="user-name">Maria Garcia</div>
+                            <div class="user-location">Miami, FL</div>
+                        </div>
+                    </div>
+                    <div class="points-col">3,780</div>
+                    <div class="co2-col">5.3 tons</div>
+                    <div class="level-col">Eco Enthusiast</div>
+                    <div class="achievements-col">
+                        <span class="achievement-badge">🏆</span>
+                    </div>
+                </div>
+
+                <div class="table-row" data-rank="8">
+                    <div class="rank-col">8</div>
+                    <div class="user-col">
+                        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&q=80" alt="James Wilson" class="user-avatar-small">
+                        <div class="user-info">
+                            <div class="user-name">James Wilson</div>
+                            <div class="user-location">Chicago, IL</div>
+                        </div>
+                    </div>
+                    <div class="points-col">3,620</div>
+                    <div class="co2-col">5.1 tons</div>
+                    <div class="level-col">Eco Enthusiast</div>
+                    <div class="achievements-col">
+                        <span class="achievement-badge">🌱</span>
+                    </div>
+                </div>
+
+                <div class="table-row" data-rank="9">
+                    <div class="rank-col">9</div>
+                    <div class="user-col">
+                        <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&q=80" alt="Sophie Brown" class="user-avatar-small">
+                        <div class="user-info">
+                            <div class="user-name">Sophie Brown</div>
+                            <div class="user-location">Portland, OR</div>
+                        </div>
+                    </div>
+                    <div class="points-col">3,450</div>
+                    <div class="co2-col">4.8 tons</div>
+                    <div class="level-col">Eco Enthusiast</div>
+                    <div class="achievements-col">
+                        <span class="achievement-badge">🌱</span>
+                    </div>
+                </div>
+
+                <div class="table-row" data-rank="10">
+                    <div class="rank-col">10</div>
+                    <div class="user-col">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=150&q=80" alt="Tom Anderson" class="user-avatar-small">
+                        <div class="user-info">
+                            <div class="user-name">Tom Anderson</div>
+                            <div class="user-location">Austin, TX</div>
+                        </div>
+                    </div>
+                    <div class="points-col">3,280</div>
+                    <div class="co2-col">4.6 tons</div>
+                    <div class="level-col">Eco Enthusiast</div>
+                    <div class="achievements-col">
+                        <span class="achievement-badge">🌱</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Your Ranking -->
+            <div class="your-ranking">
+                <div class="ranking-header">
+                    <h3>Your Ranking</h3>
+                    <div class="rank-number">#15</div>
+                </div>
+                <div class="ranking-details">
+                    <div class="your-stats">
+                        <div class="stat">
+                            <span class="stat-label">Points:</span>
+                            <span class="stat-value">2,450</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">CO₂ Reduced:</span>
+                            <span class="stat-value">3.2 tons</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Level:</span>
+                            <span class="stat-value">Eco Warrior</span>
+                        </div>
+                    </div>
+                    <div class="ranking-progress">
+                        <div class="progress-text">Points to next rank: 550</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 81%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add fade-in animation to sections
+            const sections = document.querySelectorAll('section');
+            sections.forEach((section, index) => {
+                section.style.animationDelay = `${index * 0.1}s`;
+                section.classList.add('fade-in-up');
+            });
+
+            // Simulate achievement progress updates
+            setTimeout(() => {
+                const progressBars = document.querySelectorAll('.progress-bar');
+                progressBars.forEach(bar => {
+                    const width = bar.style.width;
+                    bar.style.width = '0%';
+                    setTimeout(() => {
+                        bar.style.width = width;
+                    }, 500);
+                });
+            }, 1000);
+
+            // Enhanced Leaderboard Functionality
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const searchInput = document.getElementById('leaderboard-search');
+            const tableRows = document.querySelectorAll('.table-row');
+
+            // Filter buttons functionality
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    // Simulate data change based on period
+                    const period = this.dataset.period;
+                    console.log(`Switched to ${period} leaderboard`);
+                    
+                    // Here you would typically fetch new data from server
+                    // For now, we'll just show a visual feedback
+                    showFilterFeedback(period);
+                });
+            });
+
+            // Search functionality
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                
+                tableRows.forEach(row => {
+                    const userName = row.querySelector('.user-name').textContent.toLowerCase();
+                    const userLocation = row.querySelector('.user-location').textContent.toLowerCase();
+                    
+                    if (userName.includes(searchTerm) || userLocation.includes(searchTerm)) {
+                        row.style.display = 'grid';
+                        row.style.opacity = '1';
+                    } else {
+                        row.style.opacity = '0.3';
+                    }
+                });
+            });
+
+            // Table row click functionality
+            tableRows.forEach(row => {
+                row.addEventListener('click', function() {
+                    const rank = this.dataset.rank;
+                    const userName = this.querySelector('.user-name').textContent;
+                    
+                    // Highlight clicked row
+                    tableRows.forEach(r => r.style.background = '');
+                    this.style.background = 'var(--primary-light)';
+                    
+                    // Show user profile modal (placeholder)
+                    showUserProfile(userName, rank);
+                });
+            });
+
+            // Helper functions
+            function showFilterFeedback(period) {
+                const feedback = document.createElement('div');
+                feedback.className = 'filter-feedback';
+                feedback.textContent = `Showing ${period} leaderboard`;
+                feedback.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: var(--primary);
+                    color: white;
+                    padding: 12px 24px;
+                    border-radius: 25px;
+                    box-shadow: var(--shadow-lg);
+                    z-index: 1000;
+                    animation: slideInRight 0.3s ease;
+                `;
+                
+                document.body.appendChild(feedback);
+                
+                setTimeout(() => {
+                    feedback.remove();
+                }, 2000);
+            }
+
+            function showUserProfile(userName, rank) {
+                const modal = document.createElement('div');
+                modal.className = 'user-profile-modal';
+                modal.innerHTML = `
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3>${userName}'s Profile</h3>
+                            <button class="close-btn">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Rank: #${rank}</p>
+                            <p>This is a placeholder for the user profile modal.</p>
+                            <p>In a real application, this would show detailed user information, achievements, and statistics.</p>
+                        </div>
+                    </div>
+                `;
+                
+                modal.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0,0,0,0.5);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    z-index: 1000;
+                `;
+                
+                document.body.appendChild(modal);
+                
+                // Close modal functionality
+                modal.querySelector('.close-btn').addEventListener('click', () => {
+                    modal.remove();
+                });
+                
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        modal.remove();
+                    }
+                });
+            }
+
+            // Add slideInRight animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideInRight {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+            `;
+            document.head.appendChild(style);
+        });
+    </script>
+</body>
+</html>
