@@ -8,25 +8,33 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #10B981;
-            --primary-dark: #059669;
-            --primary-light: #D1FAE5;
-            --secondary: #3B82F6;
+            --primary: #2ECC71; /* A fresh, eco-friendly green */
+            --primary-dark: #27AE60;
+            --primary-light: #1C3A2B; /* Darker shade for backgrounds/hovers */
+            --secondary: #3B82F6; /* Keep for some contrast if needed */
             --accent: #F59E0B;
-            --success: #10B981;
+            --success: #2ECC71;
             --warning: #F59E0B;
             --danger: #EF4444;
-            --dark: #1F2937;
-            --dark-light: #374151;
-            --gray: #6B7280;
-            --gray-light: #9CA3AF;
-            --gray-lighter: #F3F4F6;
-            --white: #FFFFFF;
-            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            --gradient-primary: linear-gradient(135deg, #10B981 0%, #059669 100%);
+
+            /* Greenish Dark Theme Palette */
+            --dark: #E0F2E9; /* Main text color - a very light green */
+            --dark-light: #B2D8C4; /* Secondary text */
+            --gray: #8A9E94; /* Lighter text */
+            --gray-light: #6B8277; /* Even lighter text */
+            
+            --gray-lighter: #2A4A3E; /* Borders, dividers */
+            --white: #162C24; /* Card/surface backgrounds (was #FFFFFF) */
+            
+            /* Body background color */
+            --body-bg: #0D1B16; /* Deep, dark green */
+
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.15);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.12);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.08);
+            
+            --gradient-primary: linear-gradient(135deg, #2ECC71 0%, #27AE60 100%);
             --gradient-secondary: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%);
             --gradient-accent: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
             --gold: #FFD700;
@@ -44,7 +52,7 @@
             font-family: 'Inter', sans-serif;
             line-height: 1.6;
             color: var(--dark);
-            background: linear-gradient(135deg, #F0FDF4 0%, #ECFDF5 50%, #F0F9FF 100%);
+            background-color: var(--body-bg);
             min-height: 100vh;
         }
 
@@ -826,9 +834,9 @@
                 <nav class="header-nav">
                     <a href="index.html" class="nav-link">Home</a>
                     <a href="calculator.html" class="nav-link">Calculator</a>
-                    <a href="solutions.html" class="nav-link">Solutions</a>
                     <a href="education.html" class="nav-link">Education</a>
                     <a href="rewards.html" class="nav-link active">Rewards</a>
+                    <a href="goals.html" class="nav-link">Goals</a>
                     <a href="account.html" class="nav-link">Account</a>
                 </nav>
             </div>
@@ -836,30 +844,28 @@
     </header>
 
     <main class="container">
-        <div class="page-header">
-            <h1 class="page-title">Earn Rewards for Going Green</h1>
-            <p class="page-subtitle">Track your progress and earn badges, points, and recognition for your environmental efforts.</p>
-        </div>
+        
 
+        
         <section class="hero">
             <h2>Earn Rewards for Going Green</h2>
             <p>Track your progress and earn badges, points, and recognition for your environmental efforts.</p>
         </section>
 
-        <section>
+        <section id="achievement-progress-section">
             <h2>Your Achievement Progress</h2>
             <div class="stats-grid">
                 <div class="stat-item">
-                    <div class="stat-number">Eco Warrior</div>
+                    <div id="current-level-name" class="stat-number">...</div>
                     <div class="stat-label">Current Level</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">2,450</div>
+                    <div id="total-points" class="stat-number">...</div>
                     <div class="stat-label">Total Points</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">3.2 tons</div>
-                    <div class="stat-label">CO2 Reduced</div>
+                    <div id="co2-reduced" class="stat-number">...</div>
+                    <div class="stat-label">CO2 Reduced (est.)</div>
                 </div>
             </div>
 
@@ -867,72 +873,19 @@
                 <div class="achievement-icon">
                     <i class="fas fa-medal"></i>
                 </div>
-                <div class="achievement-title">Current Level: Eco Warrior</div>
-                <div class="achievement-description">750 / 1000 points to next level</div>
+                <div id="level-title" class="achievement-title">Current Level: ...</div>
+                <div id="level-progress-description" class="achievement-description">.../... points to next level</div>
                 <div class="achievement-progress">
-                    <div class="progress-bar" style="width: 75%;"></div>
+                    <div id="level-progress-bar" class="progress-bar" style="width: 0%;"></div>
                 </div>
-                <div class="achievement-status status-in-progress">75% Complete</div>
+                <div id="level-progress-status" class="achievement-status status-in-progress">...% Complete</div>
             </div>
         </section>
 
         <section>
-            <h2>Recent Achievements</h2>
-            <div class="card-grid">
-                <div class="card">
-                    <div class="card-content">
-                        <div style="display: flex; align-items: center; margin-bottom: 16px;">
-                            <div class="achievement-icon" style="width: 60px; height: 60px; font-size: 24px; margin: 0 16px 0 0;">
-                                <i class="fas fa-award"></i>
-                            </div>
-                            <div>
-                                <h3 style="margin: 0;">Energy Saver</h3>
-                                <p style="margin: 0; color: var(--gray);">Reduced electricity usage by 20%</p>
-                            </div>
-                        </div>
-                        <p>Earned 150 points for switching to LED bulbs and unplugging unused devices.</p>
-                        <div class="achievement-progress">
-                            <div class="progress-bar" style="width: 100%;"></div>
-                        </div>
-                        <div class="achievement-status status-completed">✓ Completed</div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-content">
-                        <div style="display: flex; align-items: center; margin-bottom: 16px;">
-                            <div class="achievement-icon" style="width: 60px; height: 60px; font-size: 24px; margin: 0 16px 0 0;">
-                                <i class="fas fa-award"></i>
-                            </div>
-                            <div>
-                                <h3 style="margin: 0;">Transport Hero</h3>
-                                <p style="margin: 0; color: var(--gray);">Used public transport for a week</p>
-                            </div>
-                        </div>
-                        <p>Earn 200 points by using public transportation, walking, or cycling for 7 consecutive days.</p>
-                        <div class="achievement-progress">
-                            <div class="progress-bar" style="width: 60%;"></div>
-                        </div>
-                        <div class="achievement-status status-in-progress">4/7 days completed</div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-content">
-                        <div style="display: flex; align-items: center; margin-bottom: 16px;">
-                            <div class="achievement-icon" style="width: 60px; height: 60px; font-size: 24px; margin: 0 16px 0 0;">
-                                <i class="fas fa-award"></i>
-                            </div>
-                            <div>
-                                <h3 style="margin: 0;">Waste Warrior</h3>
-                                <p style="margin: 0; color: var(--gray);">Zero waste challenge</p>
-                            </div>
-                        </div>
-                        <p>Earn 300 points by producing less than 1kg of waste for 30 days.</p>
-                        <div class="achievement-progress">
-                            <div class="progress-bar" style="width: 30%;"></div>
-                        </div>
-                        <div class="achievement-status status-in-progress">9/30 days completed</div>
-                    </div>
-                </div>
+            <h2>Achievements</h2>
+            <div id="achievements-grid" class="card-grid">
+                <!-- Achievements will be dynamically inserted here -->
             </div>
         </section>
 
@@ -1207,8 +1160,11 @@
         </section>
     </main>
 
+    <script src="gamification.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            updateRewardsPage();
+
             // Add fade-in animation to sections
             const sections = document.querySelectorAll('section');
             sections.forEach((section, index) => {
@@ -1216,151 +1172,95 @@
                 section.classList.add('fade-in-up');
             });
 
-            // Simulate achievement progress updates
-            setTimeout(() => {
-                const progressBars = document.querySelectorAll('.progress-bar');
-                progressBars.forEach(bar => {
-                    const width = bar.style.width;
-                    bar.style.width = '0%';
-                    setTimeout(() => {
-                        bar.style.width = width;
-                    }, 500);
-                });
-            }, 1000);
-
-            // Enhanced Leaderboard Functionality
+            // Enhanced Leaderboard Functionality (static for now)
             const filterBtns = document.querySelectorAll('.filter-btn');
             const searchInput = document.getElementById('leaderboard-search');
             const tableRows = document.querySelectorAll('.table-row');
 
-            // Filter buttons functionality
             filterBtns.forEach(btn => {
                 btn.addEventListener('click', function() {
-                    // Remove active class from all buttons
                     filterBtns.forEach(b => b.classList.remove('active'));
-                    // Add active class to clicked button
                     this.classList.add('active');
-                    
-                    // Simulate data change based on period
                     const period = this.dataset.period;
                     console.log(`Switched to ${period} leaderboard`);
-                    
-                    // Here you would typically fetch new data from server
-                    // For now, we'll just show a visual feedback
                     showFilterFeedback(period);
                 });
             });
 
-            // Search functionality
             searchInput.addEventListener('input', function() {
                 const searchTerm = this.value.toLowerCase();
-                
                 tableRows.forEach(row => {
                     const userName = row.querySelector('.user-name').textContent.toLowerCase();
-                    const userLocation = row.querySelector('.user-location').textContent.toLowerCase();
-                    
-                    if (userName.includes(searchTerm) || userLocation.includes(searchTerm)) {
+                    if (userName.includes(searchTerm)) {
                         row.style.display = 'grid';
-                        row.style.opacity = '1';
                     } else {
-                        row.style.opacity = '0.3';
+                        row.style.display = 'none';
                     }
                 });
             });
 
-            // Table row click functionality
-            tableRows.forEach(row => {
-                row.addEventListener('click', function() {
-                    const rank = this.dataset.rank;
-                    const userName = this.querySelector('.user-name').textContent;
-                    
-                    // Highlight clicked row
-                    tableRows.forEach(r => r.style.background = '');
-                    this.style.background = 'var(--primary-light)';
-                    
-                    // Show user profile modal (placeholder)
-                    showUserProfile(userName, rank);
-                });
-            });
-
-            // Helper functions
             function showFilterFeedback(period) {
-                const feedback = document.createElement('div');
-                feedback.className = 'filter-feedback';
-                feedback.textContent = `Showing ${period} leaderboard`;
-                feedback.style.cssText = `
-                    position: fixed;
-                    top: 20px;
-                    right: 20px;
-                    background: var(--primary);
-                    color: white;
-                    padding: 12px 24px;
-                    border-radius: 25px;
-                    box-shadow: var(--shadow-lg);
-                    z-index: 1000;
-                    animation: slideInRight 0.3s ease;
-                `;
-                
-                document.body.appendChild(feedback);
-                
-                setTimeout(() => {
-                    feedback.remove();
-                }, 2000);
+                // This is a placeholder function
             }
 
-            function showUserProfile(userName, rank) {
-                const modal = document.createElement('div');
-                modal.className = 'user-profile-modal';
-                modal.innerHTML = `
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h3>${userName}'s Profile</h3>
-                            <button class="close-btn">&times;</button>
-                        </div>
-                        <div class="modal-body">
-                            <p>Rank: #${rank}</p>
-                            <p>This is a placeholder for the user profile modal.</p>
-                            <p>In a real application, this would show detailed user information, achievements, and statistics.</p>
-                        </div>
-                    </div>
-                `;
+            function updateRewardsPage() {
+                const stats = getStats();
+                const unlockedAchievements = getUnlockedAchievements();
+
+                // Update stats
+                document.getElementById('current-level-name').textContent = stats.levelName;
+                document.getElementById('total-points').textContent = stats.points;
+                // Estimated CO2 saved based on points (e.g., 1 point = 1.5kg CO2)
+                document.getElementById('co2-reduced').textContent = `${(stats.points * 1.5 / 1000).toFixed(2)} tons`;
+
+                // Update level progress
+                document.getElementById('level-title').textContent = `Current Level: ${stats.levelName}`;
+                const pointsInCurrentLevel = stats.points - (LEVEL_THRESHOLDS[stats.level - 1] || 0);
+                const pointsForNextLevel = stats.nextLevelPoints - (LEVEL_THRESHOLDS[stats.level - 1] || 0);
+                document.getElementById('level-progress-description').textContent = `${pointsInCurrentLevel} / ${pointsForNextLevel} points to next level`;
                 
-                modal.style.cssText = `
-                    position: fixed;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    background: rgba(0,0,0,0.5);
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    z-index: 1000;
-                `;
-                
-                document.body.appendChild(modal);
-                
-                // Close modal functionality
-                modal.querySelector('.close-btn').addEventListener('click', () => {
-                    modal.remove();
-                });
-                
-                modal.addEventListener('click', (e) => {
-                    if (e.target === modal) {
-                        modal.remove();
+                const progressPercentage = stats.progress;
+                const progressBar = document.getElementById('level-progress-bar');
+                progressBar.style.width = `${progressPercentage}%`;
+                document.getElementById('level-progress-status').textContent = `${progressPercentage.toFixed(0)}% Complete`;
+
+
+                // Update achievements
+                const achievementsGrid = document.getElementById('achievements-grid');
+                achievementsGrid.innerHTML = ''; // Clear existing
+
+                for (const id in ACHIEVEMENTS_CONFIG) {
+                    const achievement = ACHIEVEMENTS_CONFIG[id];
+                    const isUnlocked = unlockedAchievements.includes(id);
+
+                    const card = document.createElement('div');
+                    card.className = 'card';
+                    if (isUnlocked) {
+                        card.style.borderColor = 'var(--primary)';
                     }
-                });
-            }
 
-            // Add slideInRight animation
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes slideInRight {
-                    from { transform: translateX(100%); opacity: 0; }
-                    to { transform: translateX(0); opacity: 1; }
+                    card.innerHTML = `
+                        <div class="card-content">
+                            <div style="display: flex; align-items: center; margin-bottom: 16px;">
+                                <div class="achievement-icon" style="width: 60px; height: 60px; font-size: 24px; margin: 0 16px 0 0; background: ${isUnlocked ? 'var(--gradient-primary)' : 'var(--gray-lighter)'};">
+                                    <i class="fas ${achievement.icon}"></i>
+                                </div>
+                                <div>
+                                    <h3 style="margin: 0;">${achievement.name}</h3>
+                                    <p style="margin: 0; color: var(--gray);">${achievement.description}</p>
+                                </div>
+                            </div>
+                            <div class="achievement-progress">
+                                <div class="progress-bar" style="width: ${isUnlocked ? '100%' : '0%'};"></div>
+                            </div>
+                            <div class="achievement-status ${isUnlocked ? 'status-completed' : 'status-in-progress'}">
+                                ${isUnlocked ? '✓ Unlocked' : 'Locked'}
+                            </div>
+                        </div>
+                    `;
+                    achievementsGrid.appendChild(card);
                 }
-            `;
-            document.head.appendChild(style);
+            }
         });
     </script>
 </body>

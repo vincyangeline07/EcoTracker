@@ -8,25 +8,33 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #10B981;
-            --primary-dark: #059669;
-            --primary-light: #D1FAE5;
-            --secondary: #3B82F6;
+            --primary: #2ECC71; /* A fresh, eco-friendly green */
+            --primary-dark: #27AE60;
+            --primary-light: #1C3A2B; /* Darker shade for backgrounds/hovers */
+            --secondary: #3B82F6; /* Keep for some contrast if needed */
             --accent: #F59E0B;
-            --success: #10B981;
+            --success: #2ECC71;
             --warning: #F59E0B;
             --danger: #EF4444;
-            --dark: #1F2937;
-            --dark-light: #374151;
-            --gray: #6B7280;
-            --gray-light: #9CA3AF;
-            --gray-lighter: #F3F4F6;
-            --white: #FFFFFF;
-            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            --gradient-primary: linear-gradient(135deg, #10B981 0%, #059669 100%);
+
+            /* Greenish Dark Theme Palette */
+            --dark: #E0F2E9; /* Main text color - a very light green */
+            --dark-light: #B2D8C4; /* Secondary text */
+            --gray: #8A9E94; /* Lighter text */
+            --gray-light: #6B8277; /* Even lighter text */
+            
+            --gray-lighter: #2A4A3E; /* Borders, dividers */
+            --white: #162C24; /* Card/surface backgrounds (was #FFFFFF) */
+            
+            /* Body background color */
+            --body-bg: #0D1B16; /* Deep, dark green */
+
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.15);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.12);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.08);
+            
+            --gradient-primary: linear-gradient(135deg, #2ECC71 0%, #27AE60 100%);
             --gradient-secondary: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%);
             --gradient-accent: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
         }
@@ -41,7 +49,7 @@
             font-family: 'Inter', sans-serif;
             line-height: 1.6;
             color: var(--dark);
-            background: linear-gradient(135deg, #F0FDF4 0%, #ECFDF5 50%, #F0F9FF 100%);
+            background: var(--body-bg);
             min-height: 100vh;
         }
 
@@ -84,7 +92,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--white);
+            color: #fff;
             font-size: 20px;
             box-shadow: var(--shadow);
         }
@@ -143,12 +151,8 @@
             font-family: 'Poppins', sans-serif;
             font-size: 48px;
             font-weight: 700;
-            color: var(--dark);
+            color: var(--primary);
             margin-bottom: 16px;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
 
         .page-subtitle {
@@ -483,6 +487,65 @@
                 border-radius: 0;
             }
         }
+
+        /* Article Detail View */
+        .article-detail {
+            display: none; /* Hidden by default */
+            background: var(--white);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 32px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--gray-lighter);
+        }
+
+        .article-detail-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 42px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .article-detail-content p {
+            font-size: 18px;
+            line-height: 1.8;
+            margin-bottom: 24px;
+        }
+
+        .article-detail-content h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--dark);
+            margin-top: 32px;
+            margin-bottom: 16px;
+            border-bottom: 2px solid var(--primary-light);
+            padding-bottom: 8px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 32px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .article-detail-content img {
+            max-width: 40%;
+            height: auto;
+            border-radius: 12px;
+            margin: 24px auto;
+            display: block;
+            box-shadow: var(--shadow-lg);
+        }
     </style>
 </head>
 <body>
@@ -500,9 +563,9 @@
                 <nav class="header-nav">
                     <a href="index.html" class="nav-link">Home</a>
                     <a href="calculator.html" class="nav-link">Calculator</a>
-                    <a href="solutions.html" class="nav-link">Solutions</a>
                     <a href="education.html" class="nav-link active">Education</a>
                     <a href="rewards.html" class="nav-link">Rewards</a>
+                    <a href="goals.html" class="nav-link">Goals</a>
                     <a href="account.html" class="nav-link">Account</a>
                 </nav>
             </div>
@@ -520,43 +583,146 @@
             <div class="article-grid">
                 <!-- Article 1 -->
                 <div class="article-card fade-in-up">
-                    <img src="https://images.unsplash.com/photo-1542332213-9b5a5a3236d3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Recycling bins" class="article-image">
+                    <img src="img/image1.png" alt="Recycling bins" class="article-image">
                     <div class="article-content">
                         <h3 class="article-title">Top 10 Ways to Reduce Your CO₂ Footprint</h3>
                         <p class="article-excerpt">Discover practical and effective tips to lower your carbon emissions in your daily life, from your diet to your travel habits.</p>
-                        <a href="#" class="article-link">Read More <i class="fas fa-arrow-right"></i></a>
+                        <a href="#" class="article-link" data-article="reduce-co2">Read More <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
 
                 <!-- Article 2 -->
                 <div class="article-card fade-in-up" style="animation-delay: 0.1s;">
-                    <img src="https://images.unsplash.com/photo-1569154941061-e231b4725ef1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Airplane in the sky" class="article-image">
+                    <img src="img/air.png" alt="Airplane in the sky" class="article-image">
                     <div class="article-content">
                         <h3 class="article-title">How Flying Affects the Environment</h3>
                         <p class="article-excerpt">A deep dive into the environmental impact of air travel and what you can do to fly more sustainably.</p>
-                        <a href="#" class="article-link">Read More <i class="fas fa-arrow-right"></i></a>
+                        <a href="#" class="article-link" data-article="flying-impact">Read More <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
 
                 <!-- Article 3 -->
                 <div class="article-card fade-in-up" style="animation-delay: 0.2s;">
-                    <img src="https://images.unsplash.com/photo-1561778845-c573a14535d5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Fresh local produce" class="article-image">
+                    <img src="img/ff.png" alt="Fresh local produce" class="article-image">
                     <div class="article-content">
                         <h3 class="article-title">Why Local Food Matters</h3>
                         <p class="article-excerpt">Learn how choosing locally sourced food can significantly reduce your carbon footprint and support your community.</p>
-                        <a href="#" class="article-link">Read More <i class="fas fa-arrow-right"></i></a>
+                        <p class="article-excerpt">Learn how choosing locally sourced food can significantly reduce your carbon footprint and support your community.</p>
+                        <a href="#" class="article-link" data-article="local-food">Read More <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
         </section>
+
+        <div id="article-detail-view" class="article-detail">
+            <!-- Article content will be loaded here -->
+        </div>
     </main>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Add fade-in animation to article cards
-            const cards = document.querySelectorAll('.article-card');
-            cards.forEach((card, index) => {
-                card.style.animationDelay = `${index * 0.1}s`;
+            const articleGrid = document.querySelector('.article-grid');
+            const articleDetailView = document.getElementById('article-detail-view');
+            const articleLinks = document.querySelectorAll('.article-link');
+
+            const articles = {
+                'reduce-co2': {
+                    title: 'Top 10 Ways to Reduce Your CO₂ Footprint',
+                    content: `
+                        <p>Reducing your carbon footprint is one of the most important things you can do to combat climate change. Here are ten practical and effective ways to make a difference.</p>
+                        <h3>1. Change Your Diet</h3>
+                        <p>The food we eat has a significant impact on the environment. Reducing your consumption of meat, especially red meat, can drastically lower your carbon footprint. Try incorporating more plant-based meals into your week.</p>
+                        <h3>2. Be a Conscious Consumer</h3>
+                        <p>Everything we buy has a carbon footprint. Be mindful of your purchases. Choose products with minimal packaging, buy second-hand when possible, and support businesses that are committed to sustainability.</p>
+                        <h3>3. Conserve Water</h3>
+                        <p>It takes a lot of energy to pump, treat, and heat water. By using less water, you can reduce your energy consumption. Take shorter showers, fix any leaks, and only run the dishwasher and washing machine with full loads.</p>
+                        <h3>4. Reduce, Reuse, Recycle</h3>
+                        <p>The three R's are as important as ever. Reduce the amount of waste you produce, reuse items whenever possible, and recycle materials like paper, plastic, and glass.</p>
+                        <h3>5. Travel Smarter</h3>
+                        <p>Transportation is a major source of greenhouse gas emissions. Whenever possible, walk, bike, or use public transportation. If you need to drive, consider carpooling or using an electric or hybrid vehicle.</p>
+                        <h3>6. Fly Less</h3>
+                        <p>Air travel has a huge carbon footprint. For shorter trips, consider traveling by train or bus. For longer trips, try to fly less frequently and choose direct flights when possible.</p>
+                        <h3>7. Power Your Home with Renewable Energy</h3>
+                        <p>If you have the option, switch to a renewable energy provider. You can also install solar panels on your roof to generate your own clean energy.</p>
+                        <h3>8. Make Your Home More Energy-Efficient</h3>
+                        <p>There are many ways to make your home more energy-efficient. Use LED light bulbs, unplug electronics when they're not in use, and make sure your home is well-insulated.</p>
+                        <h3>9. Plant a Tree</h3>
+                        <p>Trees are a powerful tool in the fight against climate change. They absorb carbon dioxide from the atmosphere and provide a habitat for wildlife. Plant a tree in your yard or donate to a reforestation project.</p>
+                        <h3>10. Spread the Word</h3>
+                        <p>Talk to your friends and family about the importance of reducing our carbon footprint. The more people who take action, the bigger the impact we can have.</p>
+                    `
+                },
+                'flying-impact': {
+                    title: 'How Flying Affects the Environment',
+                    content: `
+                        <p>Air travel is a significant contributor to greenhouse gas emissions, and understanding its impact is the first step towards more sustainable travel. Here’s a breakdown of how flying affects the environment and what you can do about it.</p>
+                        <img src="img/air.png" alt="Airplane in the sky">
+                        <h3>1. Carbon Dioxide (CO₂) Emissions</h3>
+                        <p>Planes burn jet fuel, releasing large amounts of CO₂ into the atmosphere. This is the most significant greenhouse gas, and it can persist for centuries, trapping heat and contributing to global warming.</p>
+                        <h3>2. Non-CO₂ Effects</h3>
+                        <p>Aircraft engines also produce other emissions that have a warming effect. These include nitrogen oxides (NOx), water vapor, soot, and sulfate aerosols. When released at high altitudes, these can form contrails and cirrus clouds that trap heat, amplifying the warming effect.</p>
+                        <h3>3. The Scale of the Problem</h3>
+                        <p>While aviation accounts for about 2.5% of global CO₂ emissions, its overall impact on climate change is estimated to be higher due to the non-CO₂ effects. As global travel increases, so does the impact of flying.</p>
+                        <h3>What Can You Do?</h3>
+                        <p>While completely avoiding air travel may not be feasible for everyone, there are steps you can take to reduce your impact:</p>
+                        <ul>
+                            <li><strong>Fly Less:</strong> The most effective way to reduce your aviation footprint is to fly less. Consider alternatives like trains or buses for shorter journeys, or virtual meetings for business trips.</li>
+                            <li><strong>Choose Direct Flights:</strong> Takeoffs and landings are the most fuel-intensive parts of a flight. Choosing a direct flight avoids the extra emissions from an additional takeoff and landing.</li>
+                            <li><strong>Fly Economy:</strong> Business and first-class seats take up more space, meaning fewer people on the plane. Flying economy is a more carbon-efficient way to travel.</li>
+                            <li><strong>Pack Light:</strong> The heavier the plane, the more fuel it burns. Packing light can make a small but meaningful difference.</li>
+                            <li><strong>Offset Your Emissions:</strong> Many airlines and third-party organizations offer carbon offsetting programs. These programs invest in projects that reduce greenhouse gas emissions, such as reforestation or renewable energy projects.</li>
+                        </ul>
+                    `
+                },
+                'local-food': {
+                    title: 'Why Local Food Matters',
+                    content: `
+                        <p>Choosing to buy local food is a powerful way to reduce your carbon footprint, support your local economy, and enjoy fresher, more nutritious produce. Here’s why making the switch to local food matters.</p>
+                        <img src="img/ff.png" alt="Fresh local produce">
+                        <h3>1. Reduced Food Miles</h3>
+                        <p>Conventional food can travel thousands of miles to reach your plate. This long-distance transportation, often by air and truck, burns fossil fuels and releases significant amounts of CO₂. Local food, on the other hand, travels a much shorter distance, resulting in a smaller carbon footprint.</p>
+                        <h3>2. Supports Local Farmers and Economy</h3>
+                        <p>Buying directly from local farmers or at farmers' markets keeps money circulating within your community. It helps small family farms stay in business and creates local jobs, strengthening the local economy.</p>
+                        <h3>3. Fresher and More Nutritious Food</h3>
+                        <p>Local food is often harvested at its peak ripeness and reaches you within a day or two. This means it's fresher, tastes better, and retains more nutrients compared to produce that has been sitting in storage and transit for weeks.</p>
+                        <h3>4. Promotes Biodiversity</h3>
+                        <p>Small local farms are more likely to grow a diverse range of crop varieties, including heirloom and heritage breeds. This is in contrast to large-scale industrial farms that often focus on a few high-yield, uniform crops. Supporting local farms helps preserve genetic diversity in our food system.</p>
+                        <h3>5. Builds Community</h3>
+                        <p>Shopping at farmers' markets or joining a Community Supported Agriculture (CSA) program connects you with the people who grow your food. It fosters a sense of community and provides an opportunity to learn more about where your food comes from and how it's grown.</p>
+                        <h3>How to Get Started</h3>
+                        <ul>
+                            <li><strong>Visit a Farmers' Market:</strong> This is one of the easiest ways to start buying local.</li>
+                            <li><strong>Join a CSA:</strong> Community Supported Agriculture programs allow you to buy a "share" in a local farm's harvest.</li>
+                            <li><strong>Look for Local Labels:</strong> Many grocery stores now label locally sourced products.</li>
+                            <li><strong>Grow Your Own:</strong> Even a small container garden on a balcony can provide you with fresh herbs and vegetables.</li>
+                        </ul>
+                    `
+                }
+            };
+
+            articleLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const articleId = this.dataset.article;
+                    const article = articles[articleId];
+
+                    if (article) {
+                        articleDetailView.innerHTML = `
+                            <a class="back-link"><i class="fas fa-arrow-left"></i> Back to Education Hub</a>
+                            <h1 class="article-detail-title">${article.title}</h1>
+                            <div class="article-detail-content">${article.content}</div>
+                        `;
+                        
+                        document.querySelector('section').style.display = 'none';
+                        articleDetailView.style.display = 'block';
+
+                        const backLink = articleDetailView.querySelector('.back-link');
+                        backLink.addEventListener('click', () => {
+                            articleDetailView.style.display = 'none';
+                            document.querySelector('section').style.display = 'block';
+                        });
+                    }
+                });
             });
         });
     </script>

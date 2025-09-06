@@ -9,25 +9,33 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
-            --primary: #10B981;
-            --primary-dark: #059669;
-            --primary-light: #D1FAE5;
-            --secondary: #3B82F6;
+            --primary: #2ECC71; /* A fresh, eco-friendly green */
+            --primary-dark: #27AE60;
+            --primary-light: #1C3A2B; /* Darker shade for backgrounds/hovers */
+            --secondary: #3B82F6; /* Keep for some contrast if needed */
             --accent: #F59E0B;
-            --success: #10B981;
+            --success: #2ECC71;
             --warning: #F59E0B;
             --danger: #EF4444;
-            --dark: #1F2937;
-            --dark-light: #374151;
-            --gray: #6B7280;
-            --gray-light: #9CA3AF;
-            --gray-lighter: #F3F4F6;
-            --white: #FFFFFF;
-            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            --gradient-primary: linear-gradient(135deg, #10B981 0%, #059669 100%);
+
+            /* Greenish Dark Theme Palette */
+            --dark: #E0F2E9; /* Main text color - a very light green */
+            --dark-light: #B2D8C4; /* Secondary text */
+            --gray: #8A9E94; /* Lighter text */
+            --gray-light: #6B8277; /* Even lighter text */
+            
+            --gray-lighter: #2A4A3E; /* Borders, dividers */
+            --white: #162C24; /* Card/surface backgrounds (was #FFFFFF) */
+            
+            /* Body background color */
+            --body-bg: #0D1B16; /* Deep, dark green */
+
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.15);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.12);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.08);
+            
+            --gradient-primary: linear-gradient(135deg, #2ECC71 0%, #27AE60 100%);
             --gradient-secondary: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%);
             --gradient-accent: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
         }
@@ -42,7 +50,7 @@
             font-family: 'Inter', sans-serif;
             line-height: 1.6;
             color: var(--dark);
-            background: linear-gradient(135deg, #F0FDF4 0%, #ECFDF5 50%, #F0F9FF 100%);
+            background-color: var(--body-bg);
             min-height: 100vh;
         }
 
@@ -236,7 +244,8 @@
             border-radius: 12px;
             font-size: 16px;
             transition: all 0.2s ease;
-            background: var(--white);
+            background: var(--body-bg);
+            color: var(--dark);
         }
 
         .input-field:focus {
@@ -255,7 +264,8 @@
             border: 2px solid var(--gray-lighter);
             border-radius: 12px;
             font-size: 16px;
-            background: var(--white);
+            background: var(--body-bg);
+            color: var(--dark);
             cursor: pointer;
             transition: all 0.2s ease;
         }
@@ -327,7 +337,7 @@
         }
 
         .main-result {
-            background: linear-gradient(135deg, #F0FDF4 0%, #ECFDF5 100%);
+            background: var(--body-bg);
             border: 2px solid var(--primary-light);
             border-radius: 20px;
             padding: 40px;
@@ -529,9 +539,9 @@
                 <nav class="header-nav">
                     <a href="index.html" class="nav-link">Home</a>
                     <a href="calculator.html" class="nav-link active">Calculator</a>
-                    <a href="solutions.html" class="nav-link">Solutions</a>
                     <a href="education.html" class="nav-link">Education</a>
                     <a href="rewards.html" class="nav-link">Rewards</a>
+                    <a href="goals.html" class="nav-link">Goals</a>
                     <a href="account.html" class="nav-link">Account</a>
                 </nav>
             </div>
@@ -584,8 +594,8 @@
                             <input type="number" id="public-transit" class="input-field" min="0" value="0" placeholder="Enter monthly transit miles">
                         </div>
                         <div class="input-group">
-                            <label for="flights" class="input-label">Flights (hours/year)</label>
-                            <input type="number" id="flights" class="input-field" min="0" value="0" placeholder="Enter annual flight hours">
+                            <label for="flights" class="input-label">Flights (hours/month)</label>
+                            <input type="number" id="flights" class="input-field" min="0" value="0" placeholder="Enter monthly flight hours">
                         </div>
                     </div>
 
@@ -640,8 +650,8 @@
 
                 <div class="main-result">
                     <div class="result-number" id="total-footprint">0</div>
-                    <div class="result-unit">kg CO₂e per year</div>
-                    <div class="result-label">Total Annual Carbon Footprint</div>
+                    <div class="result-unit">kg CO₂e per month</div>
+                    <div class="result-label">Total Monthly Carbon Footprint</div>
                 </div>
 
                 <div class="breakdown-section">
@@ -672,227 +682,247 @@
         </div>
     </main>
 
+    <script src="gamification.js"></script>
     <script>
-        const form = document.getElementById('footprint-form');
-        const resultsSection = document.getElementById('results');
-        const recalculateBtn = document.getElementById('recalculate-btn');
-        let breakdownPie;
+        document.addEventListener('DOMContentLoaded', function() {
+            const calculatorForm = document.getElementById('footprint-form');
+            const resultsSection = document.getElementById('results');
+            const recalculateBtn = document.getElementById('recalculate-btn');
+            let breakdownPie;
 
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            calculateFootprint();
-        });
-        
-        recalculateBtn.addEventListener('click', function() {
-            resultsSection.style.display = 'none';
-            resultsSection.classList.remove('show');
-            const calculatorGrid = document.querySelector('.calculator-grid');
-            calculatorGrid.classList.remove('with-results');
-            form.reset();
-            window.scrollTo({top: 0, behavior: 'smooth'});
-        });
-
-        function calculateFootprint() {
-            const electricity = parseFloat(document.getElementById('electricity').value) || 0;
-            const gas = parseFloat(document.getElementById('gas').value) || 0;
-            const carMiles = parseFloat(document.getElementById('car-miles').value) || 0;
-            const mpg = parseFloat(document.getElementById('mpg').value) || 25;
-            const publicTransit = parseFloat(document.getElementById('public-transit').value) || 0;
-            const flights = parseFloat(document.getElementById('flights').value) || 0;
-            const meatConsumption = document.getElementById('meat-consumption').value;
-            const waste = document.getElementById('waste').value;
-            const recycling = document.getElementById('recycling').value;
-
-            const electricityEmissions = electricity * 0.5 * 12; // kg CO2/year
-            const gasEmissions = gas * 5.3 * 12; // kg CO2/year
-            const gallonsUsed = (carMiles * 12) / mpg;
-            const carEmissions = gallonsUsed * 8.887; // kg CO2/year
-            const transitEmissions = publicTransit * 0.15 * 12; // kg CO2/year
-            const flightEmissions = flights * 90; // kg CO2/year (short-haul)
-
-            let foodEmissions = 0;
-            switch(meatConsumption) {
-                case 'heavy': foodEmissions = 3000; break;
-                case 'medium': foodEmissions = 2000; break;
-                case 'light': foodEmissions = 1000; break;
-                case 'none': foodEmissions = 500; break;
-            }
-
-            let wasteEmissions = 0;
-            switch(waste) {
-                case 'high': wasteEmissions = 1000; break;
-                case 'medium': wasteEmissions = 700; break;
-                case 'low': wasteEmissions = 400; break;
-                case 'zero': wasteEmissions = 100; break;
-            }
-
-            let recyclingAdjustment = 0;
-            switch(recycling) {
-                case 'none': recyclingAdjustment = 0; break;
-                case 'some': recyclingAdjustment = -200; break;
-                case 'most': recyclingAdjustment = -400; break;
-                case 'all': recyclingAdjustment = -600; break;
-            }
-
-            const totalFootprint = electricityEmissions + gasEmissions + carEmissions + 
-                                 transitEmissions + flightEmissions + foodEmissions + 
-                                 wasteEmissions + recyclingAdjustment;
-
-            document.getElementById('total-footprint').textContent = Math.round(totalFootprint).toLocaleString();
-
-            const categories = [
-                {name: 'Energy', value: electricityEmissions + gasEmissions, color: '#10B981'},
-                {name: 'Transportation', value: carEmissions + transitEmissions, color: '#3B82F6'},
-                {name: 'Flights', value: flightEmissions, color: '#8B5CF6'},
-                {name: 'Food', value: foodEmissions, color: '#F59E0B'},
-                {name: 'Waste', value: wasteEmissions + recyclingAdjustment, color: '#EF4444'}
-            ];
-
-            // Create pie chart
-            const pieCtx = document.getElementById('breakdown-pie').getContext('2d');
-            if (breakdownPie) breakdownPie.destroy();
+            calculatorForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                calculateFootprint();
+            });
             
-            breakdownPie = new Chart(pieCtx, {
-                type: 'doughnut',
-                data: {
-                    labels: categories.map(c => c.name),
-                    datasets: [{
-                        data: categories.map(c => c.value),
-                        backgroundColor: categories.map(c => c.color),
-                        borderWidth: 0,
-                        hoverOffset: 4
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            position: 'bottom',
-                            labels: {
-                                padding: 20,
-                                usePointStyle: true,
-                                font: {
-                                    family: 'Inter',
-                                    size: 12
+            recalculateBtn.addEventListener('click', function() {
+                resultsSection.style.display = 'none';
+                resultsSection.classList.remove('show');
+                const calculatorGrid = document.querySelector('.calculator-grid');
+                calculatorGrid.classList.remove('with-results');
+                form.reset();
+                window.scrollTo({top: 0, behavior: 'smooth'});
+            });
+
+            function calculateFootprint() {
+                const electricity = parseFloat(document.getElementById('electricity').value) || 0;
+                const gas = parseFloat(document.getElementById('gas').value) || 0;
+                const carMiles = parseFloat(document.getElementById('car-miles').value) || 0;
+                const mpg = parseFloat(document.getElementById('mpg').value) || 25;
+                const publicTransit = parseFloat(document.getElementById('public-transit').value) || 0;
+                const flights = parseFloat(document.getElementById('flights').value) || 0;
+                const meatConsumption = document.getElementById('meat-consumption').value;
+                const waste = document.getElementById('waste').value;
+                const recycling = document.getElementById('recycling').value;
+
+                const electricityEmissions = electricity * 0.5; // kg CO2/month
+                const gasEmissions = gas * 5.3; // kg CO2/month
+                const gallonsUsed = carMiles / mpg;
+                const carEmissions = gallonsUsed * 8.887; // kg CO2/month
+                const transitEmissions = publicTransit * 0.15; // kg CO2/month
+                const flightEmissions = flights * 90; // kg CO2/month (short-haul)
+
+                let foodEmissions = 0;
+                switch(meatConsumption) {
+                    case 'heavy': foodEmissions = 3000 / 12; break;
+                    case 'medium': foodEmissions = 2000 / 12; break;
+                    case 'light': foodEmissions = 1000 / 12; break;
+                    case 'none': foodEmissions = 500 / 12; break;
+                }
+
+                let wasteEmissions = 0;
+                switch(waste) {
+                    case 'high': wasteEmissions = (1000 / 12) * 4; break; // Assuming 4 weeks in a month
+                    case 'medium': wasteEmissions = (700 / 12) * 4; break;
+                    case 'low': wasteEmissions = (400 / 12) * 4; break;
+                    case 'zero': wasteEmissions = (100 / 12) * 4; break;
+                }
+
+                let recyclingAdjustment = 0;
+                switch(recycling) {
+                    case 'none': recyclingAdjustment = 0; break;
+                    case 'some': recyclingAdjustment = -200 / 12; break;
+                    case 'most': recyclingAdjustment = -400 / 12; break;
+                    case 'all': recyclingAdjustment = -600 / 12; break;
+                }
+
+                const totalFootprint = electricityEmissions + gasEmissions + carEmissions + 
+                                     transitEmissions + flightEmissions + foodEmissions + 
+                                     wasteEmissions + recyclingAdjustment;
+
+                document.getElementById('total-footprint').textContent = Math.round(totalFootprint).toLocaleString();
+                
+                // Store monthly data
+                storeMonthlyData(totalFootprint);
+
+                const categories = [
+                    {name: 'Energy', value: electricityEmissions + gasEmissions, color: '#10B981'},
+                    {name: 'Transportation', value: carEmissions + transitEmissions, color: '#3B82F6'},
+                    {name: 'Flights', value: flightEmissions, color: '#8B5CF6'},
+                    {name: 'Food', value: foodEmissions, color: '#F59E0B'},
+                    {name: 'Waste', value: wasteEmissions + recyclingAdjustment, color: '#EF4444'}
+                ];
+
+                // Create pie chart
+                const pieCtx = document.getElementById('breakdown-pie').getContext('2d');
+                if (breakdownPie) breakdownPie.destroy();
+                
+                breakdownPie = new Chart(pieCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: categories.map(c => c.name),
+                        datasets: [{
+                            data: categories.map(c => c.value),
+                            backgroundColor: categories.map(c => c.color),
+                            borderWidth: 0,
+                            hoverOffset: 4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    padding: 20,
+                                    usePointStyle: true,
+                                    font: {
+                                        family: 'Inter',
+                                        size: 12
+                                    }
                                 }
-                            }
-                        },
-                        tooltip: {
-                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                            titleColor: '#fff',
-                            bodyColor: '#fff',
-                            borderColor: 'rgba(255, 255, 255, 0.1)',
-                            borderWidth: 1,
-                            cornerRadius: 8,
-                            callbacks: {
-                                label: function(context) {
-                                    const value = context.parsed;
-                                    const percentage = ((value / totalFootprint) * 100).toFixed(1);
-                                    return `${context.label}: ${value.toLocaleString()} kg (${percentage}%)`;
+                            },
+                            tooltip: {
+                                backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                                titleColor: '#fff',
+                                bodyColor: '#fff',
+                                borderColor: 'rgba(255, 255, 255, 0.1)',
+                                borderWidth: 1,
+                                cornerRadius: 8,
+                                callbacks: {
+                                    label: function(context) {
+                                        const value = context.parsed;
+                                        const percentage = ((value / totalFootprint) * 100).toFixed(1);
+                                        return `${context.label}: ${value.toLocaleString()} kg (${percentage}%)`;
+                                    }
                                 }
                             }
                         }
                     }
+                });
+
+                // Generate recommendations
+                generateRecommendations(totalFootprint, categories);
+
+                // Show results and change layout
+                const calculatorGrid = document.querySelector('.calculator-grid');
+                calculatorGrid.classList.add('with-results');
+                
+                resultsSection.style.display = 'block';
+                // Use setTimeout to ensure display:block is applied before adding show class
+                setTimeout(() => {
+                    resultsSection.classList.add('show');
+                }, 10);
+                
+                window.scrollTo({ top: resultsSection.offsetTop, behavior: 'smooth' });
+
+                // Award points for calculation
+                awardAction('calculate_footprint');
+            }
+
+            function storeMonthlyData(footprint) {
+                const date = new Date();
+                const month = date.toLocaleString('default', { month: 'long' });
+                const year = date.getFullYear();
+                const key = `footprint-${year}-${month}`;
+                
+                let monthlyData = JSON.parse(localStorage.getItem('monthlyFootprints')) || {};
+                monthlyData[key] = footprint;
+                localStorage.setItem('monthlyFootprints', JSON.stringify(monthlyData));
+            }
+
+            function generateRecommendations(totalFootprint, categories) {
+                const recommendationsList = document.getElementById('recommendations-list');
+                recommendationsList.innerHTML = '';
+
+                const recommendations = [];
+
+                // Energy recommendations
+                if (categories[0].value > 2000) {
+                    recommendations.push({
+                        icon: 'fas fa-solar-panel',
+                        text: 'Switch to renewable energy sources or install solar panels'
+                    });
                 }
-            });
 
-            // Generate recommendations
-            generateRecommendations(totalFootprint, categories);
+                // Transportation recommendations
+                if (categories[1].value > 1500) {
+                    recommendations.push({
+                        icon: 'fas fa-bicycle',
+                        text: 'Consider carpooling, public transit, or cycling for daily commutes'
+                    });
+                }
 
-            // Show results and change layout
-            const calculatorGrid = document.querySelector('.calculator-grid');
-            calculatorGrid.classList.add('with-results');
-            
-            resultsSection.style.display = 'block';
-            // Use setTimeout to ensure display:block is applied before adding show class
-            setTimeout(() => {
-                resultsSection.classList.add('show');
-            }, 10);
-            
-            window.scrollTo({ top: resultsSection.offsetTop, behavior: 'smooth' });
-        }
+                // Flight recommendations
+                if (categories[2].value > 500) {
+                    recommendations.push({
+                        icon: 'fas fa-plane',
+                        text: 'Reduce air travel and consider video conferencing alternatives'
+                    });
+                }
 
-        function generateRecommendations(totalFootprint, categories) {
-            const recommendationsList = document.getElementById('recommendations-list');
-            recommendationsList.innerHTML = '';
+                // Food recommendations
+                if (categories[3].value > 2000) {
+                    recommendations.push({
+                        icon: 'fas fa-carrot',
+                        text: 'Reduce meat consumption and choose locally sourced foods'
+                    });
+                }
 
-            const recommendations = [];
+                // General recommendations based on total footprint
+                if (totalFootprint > 10000) {
+                    recommendations.push({
+                        icon: 'fas fa-home',
+                        text: 'Improve home insulation and energy efficiency'
+                    });
+                }
 
-            // Energy recommendations
-            if (categories[0].value > 2000) {
-                recommendations.push({
-                    icon: 'fas fa-solar-panel',
-                    text: 'Switch to renewable energy sources or install solar panels'
+                if (totalFootprint < 5000) {
+                    recommendations.push({
+                        icon: 'fas fa-star',
+                        text: 'Excellent! You\'re already living sustainably'
+                    });
+                }
+
+                // Add default recommendations if none specific
+                if (recommendations.length === 0) {
+                    recommendations.push(
+                        {
+                            icon: 'fas fa-recycle',
+                            text: 'Continue recycling and composting to maintain low waste levels'
+                        },
+                        {
+                            icon: 'fas fa-lightbulb',
+                            text: 'Switch to LED bulbs and energy-efficient appliances'
+                        }
+                    );
+                }
+
+                // Display recommendations
+                recommendations.forEach(rec => {
+                    const li = document.createElement('li');
+                    li.className = 'recommendation-item';
+                    li.innerHTML = `
+                        <div class="recommendation-icon">
+                            <i class="${rec.icon}"></i>
+                        </div>
+                        <span class="recommendation-text">${rec.text}</span>
+                    `;
+                    recommendationsList.appendChild(li);
                 });
             }
-
-            // Transportation recommendations
-            if (categories[1].value > 1500) {
-                recommendations.push({
-                    icon: 'fas fa-bicycle',
-                    text: 'Consider carpooling, public transit, or cycling for daily commutes'
-                });
-            }
-
-            // Flight recommendations
-            if (categories[2].value > 500) {
-                recommendations.push({
-                    icon: 'fas fa-plane',
-                    text: 'Reduce air travel and consider video conferencing alternatives'
-                });
-            }
-
-            // Food recommendations
-            if (categories[3].value > 2000) {
-                recommendations.push({
-                    icon: 'fas fa-carrot',
-                    text: 'Reduce meat consumption and choose locally sourced foods'
-                });
-            }
-
-            // General recommendations based on total footprint
-            if (totalFootprint > 10000) {
-                recommendations.push({
-                    icon: 'fas fa-home',
-                    text: 'Improve home insulation and energy efficiency'
-                });
-            }
-
-            if (totalFootprint < 5000) {
-                recommendations.push({
-                    icon: 'fas fa-star',
-                    text: 'Excellent! You\'re already living sustainably'
-                });
-            }
-
-            // Add default recommendations if none specific
-            if (recommendations.length === 0) {
-                recommendations.push(
-                    {
-                        icon: 'fas fa-recycle',
-                        text: 'Continue recycling and composting to maintain low waste levels'
-                    },
-                    {
-                        icon: 'fas fa-lightbulb',
-                        text: 'Switch to LED bulbs and energy-efficient appliances'
-                    }
-                );
-            }
-
-            // Display recommendations
-            recommendations.forEach(rec => {
-                const li = document.createElement('li');
-                li.className = 'recommendation-item';
-                li.innerHTML = `
-                    <div class="recommendation-icon">
-                        <i class="${rec.icon}"></i>
-                    </div>
-                    <span class="recommendation-text">${rec.text}</span>
-                `;
-                recommendationsList.appendChild(li);
-            });
-        }
+        });
     </script>
 </body>
 </html>

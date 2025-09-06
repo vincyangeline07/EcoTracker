@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoTrack - Eco Goals</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2ECC71; /* A fresh, eco-friendly green */
+            --primary-dark: #27AE60;
+            --primary-light: #1C3A2B; /* Darker shade for backgrounds/hovers */
+            --secondary: #3B82F6; /* Keep for some contrast if needed */
+            --accent: #F59E0B;
+            --success: #2ECC71;
+            --warning: #F59E0B;
+            --danger: #EF4444;
+
+            /* Greenish Dark Theme Palette */
+            --dark: #E0F2E9; /* Main text color - a very light green */
+            --dark-light: #B2D8C4; /* Secondary text */
+            --gray: #8A9E94; /* Lighter text */
+            --gray-light: #6B8277; /* Even lighter text */
+            
+            --gray-lighter: #2A4A3E; /* Borders, dividers */
+            --white: #162C24; /* Card/surface backgrounds (was #FFFFFF) */
+            
+            /* Body background color */
+            --body-bg: #0D1B16; /* Deep, dark green */
+
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.15);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.12);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.08);
+            
+            --gradient-primary: linear-gradient(135deg, #2ECC71 0%, #27AE60 100%);
+            --gradient-secondary: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%);
+            --gradient-accent: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: var(--body-bg);
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header Styles */
+        header {
+            background: var(--white);
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--gray-lighter);
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .logo-text {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 24px;
+            color: var(--dark);
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--gray);
+            font-weight: 500;
+            transition: color 0.2s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .nav-link.active {
+            color: var(--primary);
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--primary);
+            border-radius: 1px;
+        }
+        
+        main {
+            padding: 48px 0;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .page-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 16px;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-subtitle {
+            font-size: 18px;
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        section {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 32px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--gray-lighter);
+        }
+
+        h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 32px;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 24px;
+            text-align: center;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--gradient-primary);
+            color: var(--white);
+            border: none;
+            padding: 16px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+            box-shadow: var(--shadow);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .goals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 24px;
+        }
+
+        .goal-card {
+            background: var(--body-bg);
+            border: 1px solid var(--gray-lighter);
+            border-radius: 16px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .goal-card h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 20px;
+            margin-bottom: 12px;
+            color: var(--dark);
+        }
+
+        .goal-description {
+            color: var(--gray);
+            margin-bottom: 16px;
+            flex-grow: 1;
+        }
+
+        .progress-bar-container {
+            background: var(--gray-lighter);
+            border-radius: 8px;
+            height: 12px;
+            margin-bottom: 8px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            background: var(--gradient-primary);
+            height: 100%;
+            border-radius: 8px;
+            transition: width 0.5s ease-in-out;
+        }
+
+        .progress-text {
+            font-size: 12px;
+            color: var(--gray);
+            text-align: right;
+        }
+        
+        .streak-counter {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--accent);
+            font-weight: 600;
+            margin-top: 16px;
+        }
+
+        .streak-counter i {
+            font-size: 20px;
+        }
+
+        .add-goal-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            cursor: pointer;
+            border: 2px dashed var(--gray-lighter);
+            transition: all 0.3s ease;
+        }
+
+        .add-goal-card:hover {
+            background: var(--primary-light);
+            border-color: var(--primary);
+        }
+
+        .add-goal-icon {
+            font-size: 48px;
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.7);
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            margin: 10% auto;
+            padding: 40px;
+            border: 1px solid var(--gray-lighter);
+            width: 90%;
+            max-width: 500px;
+            border-radius: 20px;
+            position: relative;
+        }
+
+        .close-btn {
+            color: var(--gray);
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close-btn:hover {
+            color: var(--dark);
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark);
+            font-size: 14px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 16px;
+            border: 2px solid var(--gray-lighter);
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.2s ease;
+            background: var(--body-bg);
+            color: var(--dark);
+        }
+    </style>
+</head>
+<body>
+    <script>if(!localStorage.getItem('token')){window.location.href='login.html';}</script>
+    
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <span class="logo-text">EcoTrack</span>
+                </a>
+                <nav class="header-nav">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="calculator.html" class="nav-link">Calculator</a>
+                    <a href="education.html" class="nav-link">Education</a>
+                    <a href="rewards.html" class="nav-link">Rewards</a>
+                    <a href="goals.html" class="nav-link active">Goals</a>
+                    <a href="account.html" class="nav-link">Account</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="page-header">
+            <h1 class="page-title">Your Eco Goals</h1>
+            <p class="page-subtitle">Set, track, and achieve your sustainability goals. Every step counts!</p>
+        </div>
+
+        <section>
+            <h2>Active Goals</h2>
+            <div class="goals-grid" id="active-goals-grid">
+                <!-- Example Goal -->
+                <div class="goal-card">
+                    <h3>Reduce Driving</h3>
+                    <p class="goal-description">Reduce driving by 20% in 1 month.</p>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" style="width: 40%;"></div>
+                    </div>
+                    <p class="progress-text">8% / 20%</p>
+                    <div class="streak-counter">
+                        <i class="fas fa-fire"></i>
+                        <span>5-day streak of using public transport</span>
+                    </div>
+                </div>
+                
+                <div class="goal-card add-goal-card" id="add-goal-btn">
+                    <div class="add-goal-icon"><i class="fas fa-plus-circle"></i></div>
+                    <h3>Set a New Goal</h3>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <h2>Completed Goals</h2>
+            <div class="goals-grid" id="completed-goals-grid">
+                 <!-- Example Completed Goal -->
+                 <div class="goal-card">
+                    <h3>Meatless Mondays</h3>
+                    <p class="goal-description">Go meat-free every Monday for a month.</p>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" style="width: 100%;"></div>
+                    </div>
+                    <p class="progress-text">Completed!</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Add Goal Modal -->
+    <div id="addGoalModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Set a New Goal</h2>
+            <form id="add-goal-form">
+                <div class="input-group">
+                    <label for="goal-title" class="input-label">Goal Title</label>
+                    <input type="text" id="goal-title" class="input-field" placeholder="e.g., Reduce plastic use" required>
+                </div>
+                <div class="input-group">
+                    <label for="goal-description" class="input-label">Description</label>
+                    <textarea id="goal-description" class="input-field" rows="3" placeholder="e.g., Avoid single-use plastics for a month"></textarea>
+                </div>
+                <button type="submit" class="btn">Add Goal</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="gamification.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById('addGoalModal');
+            const addGoalBtn = document.getElementById('add-goal-btn');
+            const closeBtn = document.querySelector('.modal .close-btn');
+            const addGoalForm = document.getElementById('add-goal-form');
+            const activeGoalsGrid = document.getElementById('active-goals-grid');
+
+            addGoalBtn.onclick = function() {
+                modal.style.display = 'block';
+            }
+
+            closeBtn.onclick = function() {
+                modal.style.display = 'none';
+            }
+
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = 'none';
+                }
+            }
+            
+            addGoalForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const title = document.getElementById('goal-title').value;
+                const description = document.getElementById('goal-description').value;
+                
+                const newGoalCard = `
+                    <div class="goal-card">
+                        <h3>${title}</h3>
+                        <p class="goal-description">${description}</p>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" style="width: 0%;"></div>
+                        </div>
+                        <p class="progress-text">0%</p>
+                        <button class="btn complete-goal-btn" style="margin-top: 16px;">Complete Goal</button>
+                    </div>
+                `;
+                
+                // Insert before the 'add goal' button
+                addGoalBtn.insertAdjacentHTML('beforebegin', newGoalCard);
+                
+                // Award points for setting a goal
+                awardAction('set_goal');
+
+                modal.style.display = 'none';
+                addGoalForm.reset();
+            });
+
+            activeGoalsGrid.addEventListener('click', function(e) {
+                if (e.target.classList.contains('complete-goal-btn')) {
+                    const card = e.target.closest('.goal-card');
+                    
+                    // Award points for completing a goal
+                    awardAction('complete_goal');
+
+                    // Move card to completed section
+                    const completedGoalsGrid = document.getElementById('completed-goals-grid');
+                    e.target.remove(); // remove the button
+                    card.querySelector('.progress-bar').style.width = '100%';
+                    card.querySelector('.progress-text').textContent = 'Completed!';
+                    completedGoalsGrid.appendChild(card);
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
